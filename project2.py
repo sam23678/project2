@@ -1,12 +1,13 @@
-from moviepy.editor import *
-
-mp4_file = r'E:\demo-video-file.mp4'
-mp3_file = r'E:\converted-mp-file.mp3'
-
-videoclip = VideoFileClip(mp4_file)
-
-audioclip = videoclip.audio
-audioclip.write_audiofile(mp3_file)
-
-audioclip.close()
-videoclip.close()
+from __future__ import unicode_literals
+import youtube_dl
+video = input ("Please Enter your youtube link: ")
+ydl_opts = {
+    'format': 'bestaudio/best',
+    'postprocessors': [{
+        'key': 'FFmpegExtractAudio',
+        'preferredcodec': 'mp3',
+        'preferredquality': '320',
+    }],
+}
+with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+    ydl.download([video])
